@@ -12,10 +12,10 @@ const scrapeQueue = new Queue("scrapeQueue", { connection });
 // Reset the news collection at the start
 await redis.del("newsCollection");
 
-// Schedule jobs hourly from 7am to 11pm (7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-// Cron: minute hour * * * (run at top of each hour)
-// Hour 0-23 in 24-hour format, so 7am-11pm = hours 7-23
-const cronPattern = "0 7-23 * * *";
+// Schedule jobs at 15 minutes past each hour from 7:15am to 10:15am (7, 8, 9, 10)
+// Cron: minute hour * * * (run at :15 of each hour in the window)
+// Hour 0-23 in 24-hour format, so 7:15am-10:15am = hours 7-10 at minute 15
+const cronPattern = "15 7-22 * * *";
 
 await scrapeQueue.add(
   "scheduled-job",
@@ -27,11 +27,9 @@ await scrapeQueue.add(
   }
 );
 
-console.log("📅 Scheduled jobs: Hourly from 7am to 11pm");
+console.log("📅 Scheduled jobs: 7:15am to 10:15am (every hour at :15)");
 console.log(`⏰ Cron pattern: "${cronPattern}"`);
-console.log(
-  "   → Runs at: 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 (24-hour format)"
-);
+console.log("   → Runs at: 7:15am, 8:15am, 9:15am, 10:15am (24-hour format)");
 
 const worker = new Worker(
   "scrapeQueue",
