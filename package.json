@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@phukon/duckduckgo-search": "^1.1.0",
     "dotenv": "^16.0.0"
   },
   "devDependencies": {
