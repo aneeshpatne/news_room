@@ -23,12 +23,14 @@ export async function news_aggregator(scrapedContent = null) {
   const prompt = `You are a professional news aggregator. Analyze the following scraped news content and extract ALL valuable, relevant news items. 
 
 IMPORTANT RULES:
-1. Only extract news that is factual, newsworthy, and relevant
-2. Ignore repetitive or duplicate stories - merge similar news into ONE comprehensive item
-3. Skip irrelevant content like ads, navigation text, or non-news information
-4. For each unique news story, invoke the newsTool to save it with:
-   - A concise 5-word title
-   - A 10-word description
+  1. Only extract news that is factual, newsworthy, and relevant
+  2. Ignore repetitive or duplicate stories - merge similar news into ONE comprehensive item
+  3. Skip irrelevant content like ads, navigation text, or non-news information
+  4. For each unique news story, invoke the newsTool to save it with:
+    - A concise 5-word title
+    - A 10-word description
+  5. If a story cannot be meaningfully summarized without exceeding these tight word limits or feels vague, skip it outright rather than stretching the description into filler.
+  6. Avoid open-ended "explained" style pieces (e.g., "5 reasons for BJP victory explained") that don’t deliver a clear, closed-ended update; drop them unless a precise takeaway can be stated.
 
 Extract as many unique, valuable news items as possible (aim for 15-20).
 
