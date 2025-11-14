@@ -10,7 +10,7 @@ export async function search(searchTerm) {
     const data = await res.json();
 
     if (data.items) {
-      return data.items.map((item) => ({ href: item.link }));
+      return data.items.map((item) => item.link);
     } else {
       console.log("No search results found");
       return [];
