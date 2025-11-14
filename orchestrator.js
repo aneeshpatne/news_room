@@ -9,6 +9,12 @@ await redis.connect();
 
 const scrapeQueue = new Queue("scrapeQueue", { connection });
 
+// Clean up any stray jobs from previous runs
+await scrapeQueue.clean(0, "wait");
+await scrapeQueue.clean(0, "delayed");
+await scrapeQueue.clean(0, "active");
+console.log("🧹 Cleaned up stray jobs from queue");
+
 // Schedule jobs at 15 minutes past each hour from 7:15am to 10:15pm (7-22)
 // Cron: minute hour * * * (run at :15 of each hour in the window)
 // Hour 0-23 in 24-hour format, so 7:15am-10:15pm = hours 7-22 at minute 15
