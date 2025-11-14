@@ -32,6 +32,8 @@ IMPORTANT RULES:
 
 Extract as many unique, valuable news items as possible (aim for 15-20).
 
+The scraped content spans India-wide coverage and Mumbai-specific updates, so capture both perspectives.
+
 SCRAPED CONTENT:
 ${contentContext}`;
 

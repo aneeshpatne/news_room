@@ -44,8 +44,13 @@ const worker = new Worker(
     await redis.del("newsCollection");
 
     // Search and scrape
-    const urls = await search("India News");
-    const scrapedContent = await scrape(urls);
+    const indiaUrls = await search("India News");
+    const mumbaiUrls = await search("Mumbai News");
+    const mergedSearchUrls = Array.from(new Set([...indiaUrls, ...mumbaiUrls]));
+    console.log(
+      `🔍 Merged India + Mumbai search returned ${mergedSearchUrls.length} URLs`
+    );
+    const scrapedContent = await scrape(mergedSearchUrls);
 
     // Content validation
     console.log(`📊 Content types validation:`);
