@@ -67,14 +67,16 @@ app.get("/alert-remark", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 News server running on http://localhost:${PORT}`);
-  console.log(`📰 GET /news_items - Get a random news item`);
-  console.log(`🔑 GET /alert-remark - Fetch the stored alert-remark key`);
-}).on("error", (err) => {
-  console.error("❌ Server error:", err);
-  process.exit(1);
-});
+app
+  .listen(PORT, () => {
+    console.log(`🚀 News server running on http://localhost:${PORT}`);
+    console.log(`📰 GET /news_items - Get a random news item`);
+    console.log(`🔑 GET /alert-remark - Fetch the stored alert-remark key`);
+  })
+  .on("error", (err) => {
+    console.error("❌ Server error:", err);
+    process.exit(1);
+  });
 
 // Catch unhandled promise rejections
 process.on("unhandledRejection", (reason, promise) => {

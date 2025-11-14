@@ -28,9 +28,10 @@ IMPORTANT RULES:
   3. Skip irrelevant content like ads, navigation text, or non-news information
   4. For each unique news story, invoke the newsTool to save it with:
     - A concise 5-word title
-    - A 10-word description
+    - A 10-word description that includes CONCRETE FACTS, NUMBERS, NAMES, or PLACES (not vague generalizations)
   5. If a story cannot be meaningfully summarized without exceeding these tight word limits or feels vague, skip it outright rather than stretching the description into filler.
-  6. Avoid open-ended "explained" style pieces (e.g., "5 reasons for BJP victory explained") that don’t deliver a clear, closed-ended update; drop them unless a precise takeaway can be stated.
+  6. Avoid open-ended "explained" style pieces (e.g., "5 reasons for BJP victory explained") that don't deliver a clear, closed-ended update; drop them unless a precise takeaway can be stated.
+  7. CRITICAL: Each description must be specific and descriptive—include WHO (person/organization), WHAT (action/event), WHERE (location), and WHEN (time) when possible. Reject vague summaries like "Things are changing" or "Updates expected"—only extract concrete news.
 
 Extract as many unique, valuable news items as possible (aim for 15-20).
 
