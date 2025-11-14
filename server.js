@@ -7,6 +7,7 @@ const redis = createClient({ host: "127.0.0.1", port: 6379 });
 await redis.connect();
 
 app.use(express.json());
+const PORT = 3000;
 
 app.get("/news_items", async (req, res) => {
   try {
@@ -36,8 +37,29 @@ app.get("/news_items", async (req, res) => {
   }
 });
 
-const PORT = 3000;
+app.get("/alert-remark", async (req, res) => {
+  try {
+    const alertRemarkKey = await redis.get("alert-remark");
+
+    if (!alertRemarkKey) {
+      return res.status(404).json({ error: "alert-remark key not found" });
+    }
+
+    const response = {
+      key: "alert-remark",
+      value: alertRemarkKey,
+      type: "key",
+    };
+
+    res.json(response);
+  } catch (error) {
+    console.error("Error fetching alert-remark key:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 News server running on http://localhost:${PORT}`);
   console.log(`📰 GET /news_items - Get a random news item`);
+  console.log(`🔑 GET /alert-remark - Fetch the stored alert-remark key`);
 });

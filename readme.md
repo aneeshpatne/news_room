@@ -185,6 +185,26 @@ Returns a random news item from the Redis collection.
 - `404` - No news items available
 - `500` - Server error
 
+### GET /alert-remark
+
+Returns the existing `alert-remark:key` value stored in Redis so the caller can forward it to downstream systems.
+
+**Response:**
+
+```json
+{
+  "key": "alert-remark",
+  "value": "alert-remark-xxxxx",
+  "type": "key"
+}
+```
+
+**Status Codes:**
+
+- `200` - Success
+- `404` - alert-remark key not found
+- `500` - Server error
+
 ## Technology Stack 🛠️
 
 - **Node.js** - JavaScript runtime
