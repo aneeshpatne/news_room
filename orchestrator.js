@@ -36,11 +36,9 @@ console.log(
 );
 
 // Remove any pending/delayed jobs to ensure clean start
-const jobs = await scrapeQueue.getJobs();
+const jobs = await scrapeQueue.getJobs(["waiting", "delayed"]);
 for (const job of jobs) {
-  if (job.isPending() || job.isDelayed()) {
-    await job.remove();
-  }
+  await job.remove();
 }
 console.log("🧹 Cleaned up pending/delayed jobs from queue");
 
