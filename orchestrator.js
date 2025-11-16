@@ -35,10 +35,13 @@ console.log(
   "   → Runs at: 7:15am, 8:15am, 9:15am, 10:15am, ..., 9:15pm, 10:15pm (24-hour format)"
 );
 
-// Remove any pending/delayed jobs to ensure clean start
+// Remove any pending/delayed jobs to ensure clean start (skip recurring jobs)
 const jobs = await scrapeQueue.getJobs(["waiting", "delayed"]);
 for (const job of jobs) {
-  await job.remove();
+  // Skip jobs that are part of a job scheduler (recurring jobs)
+  if (!job.repeatJobKey) {
+    await job.remove();
+  }
 }
 console.log("🧹 Cleaned up pending/delayed jobs from queue");
 
