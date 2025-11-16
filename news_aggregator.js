@@ -50,7 +50,7 @@ IMPORTANT RULES:
   }. Avoid open-ended "explained" style pieces (e.g., "5 reasons for BJP victory explained") that don't deliver a clear, closed-ended update; drop them unless a precise takeaway can be stated.
   ${
     hasOldNews ? `8` : `7`
-  }. CRITICAL: Each description must be specific and descriptive—include WHO (person/organization), WHAT (action/event), WHERE (location), and WHEN (time) when possible. Reject vague summaries like "Things are changing" or "Updates expected"—only extract concrete${
+  }. CRITICAL: Each description must be specific and descriptive—include WHO (person/organization), WHAT (action/event), and WHERE (location) when possible. Reject vague summaries like "Things are changing" or "Updates expected"—only extract concrete${
     hasOldNews ? `, NEW` : ``
   } news.
 

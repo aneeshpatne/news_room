@@ -35,6 +35,15 @@ console.log(
   "   → Runs at: 7:15am, 8:15am, 9:15am, 10:15am, ..., 9:15pm, 10:15pm (24-hour format)"
 );
 
+// Remove any pending/delayed jobs to ensure clean start
+const jobs = await scrapeQueue.getJobs();
+for (const job of jobs) {
+  if (job.isPending() || job.isDelayed()) {
+    await job.remove();
+  }
+}
+console.log("🧹 Cleaned up pending/delayed jobs from queue");
+
 const worker = new Worker(
   "scrapeQueue",
   async (job) => {
