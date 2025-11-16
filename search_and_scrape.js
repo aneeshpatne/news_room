@@ -5,7 +5,9 @@ export async function search(searchTerm) {
   try {
     const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
       searchTerm
-    )}&fields=items(link)&key=${process.env.API_KEY}&cx=${process.env.CX}`;
+    )}&dateRestrict=d1&fields=items(link)&key=${process.env.API_KEY}&cx=${
+      process.env.CX
+    }`;
     const res = await fetch(url);
     const data = await res.json();
 

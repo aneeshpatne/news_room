@@ -38,12 +38,21 @@ console.log(
 const worker = new Worker(
   "scrapeQueue",
   async (job) => {
-    console.log(
-      `🔧 Running job ${job.id} at ${new Date().toLocaleTimeString()}`
-    );
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hours * 60 + minutes; // Convert to minutes for comparison
+    const targetTime = 7 * 60 + 15; // 7:15 AM in minutes
 
-    // Reset news collection for fresh execution
-    await redis.del("newsCollection");
+    if (currentTime < targetTime) {
+      console.log(
+        `⏰ Current time ${now.toLocaleTimeString()} is before 7:15 AM. Deleting newsCollection key and skipping job.`
+      );
+      await redis.del("newsCollection");
+      return { done: false, reason: "Before 7:15 AM - skipped" };
+    }
+
+    console.log(`🔧 Running job ${job.id} at ${now.toLocaleTimeString()}`);
 
     // Search and scrape
     const indiaUrls = await search("India News");

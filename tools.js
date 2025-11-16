@@ -14,7 +14,7 @@ export const newsTool = tool({
     description: z
       .string()
       .describe(
-        "The description of the news article can be maximum of 10 words."
+        "The description of the news article can be maximum of 15 words."
       ),
   }),
   execute: async ({ title, description }) => {
